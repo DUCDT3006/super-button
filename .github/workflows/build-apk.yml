@@ -24,22 +24,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Grant Execute Permission to Gradlew
+        run: chmod +x gradlew
 
-      - name: Generate Gradle Wrapper if missing
-        run: |
-          if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
-            sudo apt-get update && sudo apt-get install -y gradle
-            gradle wrapper --gradle-version 8.5
-          fi
-          chmod +x gradlew
-
-      - name: Build Debug APK
+      - name: Build Debug APK with Gradle
         run: ./gradlew assembleDebug --stacktrace
 
-      - name: Rename APK
+      - name: Prepare APK for Release
         run: |
           cp app/build/outputs/apk/debug/app-debug.apk SuperButton-v1.0.0.apk
 
