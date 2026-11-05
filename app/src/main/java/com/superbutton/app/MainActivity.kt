@@ -62,14 +62,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnGrantAccessibility.setOnClickListener {
-            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            startActivity(intent)
-            Toast.makeText(
-                this,
-                "Hãy tìm và bật 'Super Button - Hỗ trợ Nút Nguồn Ảo' trong danh sách dịch vụ đã cài đặt",
-                Toast.LENGTH_LONG
-            ).show()
+            showAccessibilityGuideDialog()
         }
+    }
+
+    private fun showAccessibilityGuideDialog() {
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Kích hoạt Quyền Trợ năng (Accessibility)")
+            .setMessage(
+                "Để nút nguồn ảo có thể Khóa màn hình và Mở menu tắt nguồn:\n\n" +
+                "1. Nhấn 'Đi đến Cài đặt' bên dưới.\n" +
+                "2. Chọn mục 'Ứng dụng đã cài đặt' (Installed apps).\n" +
+                "3. Tìm 'Super Button - Hỗ trợ Nút Nguồn Ảo' và gạt BẬT.\n\n" +
+                "⚠️ Lưu ý nếu máy báo 'Cài đặt bị hạn chế':\n" +
+                "• Ra màn hình chính, nhấn giữ icon app Super Button -> Chọn (i) Thông tin ứng dụng.\n" +
+                "• Bấm dấu 3 chấm góc trên bên phải -> Chọn 'Cho phép cài đặt bị hạn chế'."
+            )
+            .setPositiveButton("Đi đến Cài đặt") { _, _ ->
+                val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                startActivity(intent)
+            }
+            .setNegativeButton("Đóng", null)
+            .show()
     }
 
     private fun updatePermissionStatus() {
@@ -99,14 +113,11 @@ class MainActivity : AppCompatActivity() {
     private fun isAccessibilityServiceEnabled(): Boolean {
         if (PowerAccessibilityService.isServiceRunning) return true
 
-        val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        val enabledServices = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
-        for (service in enabledServices) {
-            if (service.resolveInfo.serviceInfo.packageName == packageName) {
-                return true
-            }
-        }
-        return false
+        val enabledServices = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        ) ?: ""
+        return enabledServices.contains(packageName)
     }
 
     private fun setupMainSwitch() {

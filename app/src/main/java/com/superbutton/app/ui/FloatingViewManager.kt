@@ -3,6 +3,7 @@ package com.superbutton.app.ui
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.graphics.Point
 import android.os.Build
@@ -11,6 +12,7 @@ import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -20,6 +22,7 @@ import android.view.ViewConfiguration
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
+import android.widget.Toast
 import com.superbutton.app.R
 import com.superbutton.app.data.PreferenceManager
 import com.superbutton.app.model.ButtonAction
@@ -315,10 +318,25 @@ class FloatingViewManager(private val context: Context) {
 
         val service = PowerAccessibilityService.instance
         if (service != null) {
-            service.executeAction(action)
+            val executed = service.executeAction(action)
+            if (!executed) {
+                Toast.makeText(context, "Hệ thống từ chối thực hiện tác vụ", Toast.LENGTH_SHORT).show()
+            }
         } else {
-            // Service not running: fallback to opening settings or showing toast
-            toggleRadialMenu()
+            Toast.makeText(
+                context,
+                "⚠️ Vui lòng cấp Quyền Trợ năng (Accessibility) cho Super Button trong Cài đặt!",
+                Toast.LENGTH_LONG
+            ).show()
+
+            try {
+                val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -341,33 +359,33 @@ class FloatingViewManager(private val context: Context) {
         // Setup button clicks
         radialMenuView?.findViewById<View>(R.id.actionPowerMenu)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.POWER_MENU)
             dismissRadialMenu()
+            handleAction(ButtonAction.POWER_MENU)
         }
         radialMenuView?.findViewById<View>(R.id.actionLockScreen)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.LOCK_SCREEN)
             dismissRadialMenu()
+            handleAction(ButtonAction.LOCK_SCREEN)
         }
         radialMenuView?.findViewById<View>(R.id.actionScreenshot)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.SCREENSHOT)
             dismissRadialMenu()
+            handleAction(ButtonAction.SCREENSHOT)
         }
         radialMenuView?.findViewById<View>(R.id.actionVolume)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.VOLUME_PANEL)
             dismissRadialMenu()
+            handleAction(ButtonAction.VOLUME_PANEL)
         }
         radialMenuView?.findViewById<View>(R.id.actionNotifications)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.NOTIFICATIONS)
             dismissRadialMenu()
+            handleAction(ButtonAction.NOTIFICATIONS)
         }
         radialMenuView?.findViewById<View>(R.id.actionHome)?.setOnClickListener {
             triggerHapticFeedback(false)
-            PowerAccessibilityService.instance?.executeAction(ButtonAction.HOME)
             dismissRadialMenu()
+            handleAction(ButtonAction.HOME)
         }
 
         // Tap root background to dismiss
