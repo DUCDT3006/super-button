@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Super Button</string>
+    <string name="accessibility_service_name">Super Button - Hỗ trợ Nút Nguồn Ảo</string>
+    <string name="accessibility_service_description">Dịch vụ này cho phép Super Button thực hiện các tác vụ thay thế nút nguồn vật lý như Khóa màn hình, Mở bảng chọn Tắt nguồn/Khởi động lại và Chụp ảnh màn hình.</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">Super Button Service</string>
+    <string name="notification_channel_desc">Duy trì nút nguồn ảo luôn hiển thị và không bị hệ thống tắt</string>
+    <string name="notification_title">Nút Nguồn Ảo đang hoạt động</string>
+    <string name="notification_text">Chạm để mở cài đặt tùy biến</string>
+
+    <!-- Main UI Titles -->
+    <string name="header_title">Super Button</string>
+    <string name="header_subtitle">Nút nguồn ảo thay thế phím vật lý cho Samsung Note 20</string>
+    <string name="section_permissions">Cấp Quyền Cần Thiết</string>
+    <string name="section_main_switch">Kích Hoạt Nút Nguồn Ảo</string>
+    <string name="section_appearance">Độ Trong Suốt &amp; Kích Thước</string>
+    <string name="section_movement">Cơ Chế Di Chuyển &amp; Neo Vị Trí</string>
+    <string name="section_gestures">Gán Cử Chỉ Thao Tác</string>
+    <string name="section_samsung_tips">Mẹo Bật Màn Hình Cho Note 20</string>
+
+    <!-- Permissions descriptions -->
+    <string name="perm_overlay_title">Quyền Hiển thị trên ứng dụng khác</string>
+    <string name="perm_overlay_desc">Cho phép nút nổi hiển thị xuyên suốt trên mọi màn hình</string>
+    <string name="perm_accessibility_title">Quyền Trợ năng (Accessibility)</string>
+    <string name="perm_accessibility_desc">Để thực hiện Khóa màn hình, Mở menu tắt nguồn và Chụp màn hình</string>
+    <string name="perm_granted">ĐÃ BẬT</string>
+    <string name="perm_grant_action">CẤP QUYỀN</string>
+
+    <!-- Appearance -->
+    <string name="label_active_opacity">Độ mờ khi chạm vào (Active): %1$d%%</string>
+    <string name="label_idle_opacity">Độ mờ khi nhàn rỗi (Auto-fade): %1$d%%</string>
+    <string name="label_idle_timeout">Thời gian tự mờ khi không chạm: %1$d giây</string>
+    <string name="label_button_size">Kích thước nút: %1$d dp</string>
+    <string name="switch_snap_to_edge">Tự động dính vào mép màn hình (Snap to edge)</string>
+    <string name="switch_snap_desc">Nút tự lướt êm ái về cạnh trái/phải gần nhất khi thả tay</string>
+    <string name="switch_haptic">Rung phản hồi khi nhấn (Haptic Feedback)</string>
+    <string name="switch_radial_menu">Sử dụng Menu tròn mở rộng (Quick Radial Menu)</string>
+
+    <!-- Gestures -->
+    <string name="gesture_single_tap">Chạm 1 lần (Single Tap)</string>
+    <string name="gesture_double_tap">Chạm 2 lần (Double Tap)</string>
+    <string name="gesture_long_press">Nhấn giữ (Long Press)</string>
+
+    <!-- Actions -->
+    <string name="action_lock_screen">Khóa màn hình (Giữ vân tay)</string>
+    <string name="action_power_menu">Menu Tắt nguồn / Khởi động lại</string>
+    <string name="action_screenshot">Chụp ảnh màn hình</string>
+    <string name="action_radial_menu">Mở Menu tròn đa năng</string>
+    <string name="action_volume">Bảng điều khiển Âm lượng</string>
+    <string name="action_notifications">Kéo thanh thông báo</string>
+    <string name="action_recents">Ứng dụng gần đây (Đa nhiệm)</string>
+    <string name="action_home">Về màn hình chính (Home)</string>
+    <string name="action_back">Quay lại (Back)</string>
+
+    <!-- Samsung Note 20 Tips -->
+    <string name="tip_title">Cách BẬT màn hình khi mất nút nguồn:</string>
+    <string name="tip_content">Vào Cài đặt máy Samsung -> Tính năng nâng cao -> Chuyển động và thao tác:\n• Bật "Chạm hai lần để bật màn hình"\n• Bật "Nhấc lên để đánh thức"\nHoặc chạm trực tiếp ngón tay đã đăng ký vào vùng vân tay trên màn hình.</string>
+    <string name="btn_open_samsung_settings">Mở Cài đặt Tính năng nâng cao</string>
+</resources>

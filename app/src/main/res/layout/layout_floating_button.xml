@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floatingRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/btnPower"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_floating_button"
+        android:contentDescription="@string/app_name"
+        android:elevation="10dp"
+        android:padding="14dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_power" />
+
+</FrameLayout>
